@@ -19,6 +19,36 @@ st.set_page_config(
     layout="wide",
 )
 
+import base64
+
+def get_base64(file):
+    with open(file, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+bg = get_base64("background.jpg")
+
+st.markdown(
+    f"""
+    <style>
+
+    /* LEFT SIDEBAR */
+    section[data-testid="stSidebar"] {{
+        background-color: #0b1c2d;
+    }}
+
+    /* MAIN RIGHT PANEL */
+    .stApp {{
+        background-image: url("data:image/jpg;base64,{bg}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }}
+
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # ------------------------- GitHub assets -------------------------
 TEMPLATE_URL = "https://raw.githubusercontent.com/dimitrisaronis1-dev/MANMONTHS-11/main/OUTPUT%20-%20NEW%20FORMAT%20TEMPLATE.xlsx"
 LOGO_URL = "https://raw.githubusercontent.com/dimitrisaronis1-dev/MANMONTHS-11/main/SPACE%20LOGO_colored%20horizontal.png"
